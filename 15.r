@@ -1,21 +1,31 @@
-planet <- c("Earth","Mars")
-a = matrix(planet, nrow = 2, ncol = 1)
+inputs <- readline(prompt = "Enter planet: ")
+planet <- c(strsplit(inputs, split = " "))
+planet <- unlist(planet)
 
-x1<-c(1,2)
-x2<-c(3,4)
-x3<-c(5,6)
-b = matrix(x1, nrow = 2, ncol = 1)
-c = matrix(x2, nrow = 2, ncol = 1)
-d = matrix(x3, nrow = 2, ncol = 1)
+a = matrix(planet, nrow = length(planet), ncol = 1)
+
+x1<-c(scan())
+x2<-c(scan())
+x3<-c(scan())
+b = matrix(x1, nrow = length(planet), ncol = 1)
+c = matrix(x2, nrow = length(planet), ncol = 1)
+d = matrix(x3, nrow = length(planet), ncol = 1)
 f <- data.frame(a,b,c,d)
-colnames(f) <- c("Planet", "Distance to the Sun", "Relative V", "Relative Mass")
-rownames(f) <- c(""," ")
+colnames(f) <- c("Planet", "DistancetotheSun", "RelativeV", "RelativeMass")
+
 f
-mi <- min(f[[2]])
-ma <- max(f[[2]])
-mi
-ma
-#kak vibrat' stroky v dataframe???
-minindex <- (which (x %in% min(x)))
-x5 <- (f[[2]])[-mi]
-x5
+
+minindex <- which (f[[2]] %in% min(f[[2]]))
+minindex
+mi <- f$Planet[minindex]
+
+maxindex <- which (f[[2]] %in% max(f[[2]]))
+maxindex
+ma <- f$Planet[maxindex]
+
+f <- f[ order (f$DistancetotheSun), ]
+
+
+sr <- mean(f$RelativeMass)
+na <- colnames(f)
+
